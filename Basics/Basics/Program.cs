@@ -12,7 +12,7 @@ namespace Basics
     {
         static void Main(string[] args)
         {
-            Assignment20();
+            Assignment1();
             Console.ReadLine();
         }
 
