@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 using System.Threading;
+using System.Reflection;
 
 namespace Basics
 {
@@ -12,11 +13,21 @@ namespace Basics
     {
         static void Main(string[] args)
         {
-            Assignment1();
-            Console.ReadLine();
+            while (true)
+            {
+                Console.Write("Enter assignment number (1-20) or enter something else to exit > ");
+                int assignment;
+                if ( ! int.TryParse(Console.ReadLine(), out assignment) 
+                    || assignment < 1 || assignment > 20)
+                    break;
+
+                Type type = typeof(Program);
+                MethodInfo info = type.GetMethod("Assignment" + assignment, BindingFlags.Static | BindingFlags.Public);
+                info.Invoke(null, null);
+            }
         }
 
-        static void Assignment1()
+        public static void Assignment1()
         {
             Console.Write("Enter an integer > ");
             int number;
@@ -43,7 +54,7 @@ namespace Basics
             }
         }
 
-        static void Assignment2()
+        public static void Assignment2()
         {
             Console.Write("Enter the number of points > ");
             int points;
@@ -68,7 +79,7 @@ namespace Basics
             Console.WriteLine("The matching grade is " + grade);
         }
 
-        static void Assignment3()
+        public static void Assignment3()
         {
             Console.Write("Enter first number > ");
             double value1 = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
@@ -81,7 +92,7 @@ namespace Basics
             Console.WriteLine("Average = " + (value1 + value2 + value3) / 3);
         }
 
-        static void Assignment4()
+        public static void Assignment4()
         {
             Console.Write("Enter an age > ");
             int age;
@@ -99,7 +110,7 @@ namespace Basics
                 Console.Write("senior");
         }
 
-        static void Assignment5()
+        public static void Assignment5()
         {
             Console.Write("Enter a number of seconds > ");
             int input;
@@ -115,7 +126,7 @@ namespace Basics
             Console.WriteLine("... is the same as " + hours + " hours " + minutes + " minutes and " + seconds + " seconds");
         }
 
-        static void Assignment6()
+        public static void Assignment6()
         {
             Console.Write("Enter a distance in kilometers > ");
             double distance;
@@ -130,7 +141,7 @@ namespace Basics
             Console.WriteLine("Fuel spent: " + fuel + " liters, price: " + price + " euros");
         }
 
-        static void Assignment7()
+        public static void Assignment7()
         {
             Console.Write("Enter a year > ");
             int year;
@@ -148,7 +159,7 @@ namespace Basics
 
         }
 
-        static void Assignment8()
+        public static void Assignment8()
         {
             Console.Write("Enter first integer > ");
             int value1 = int.Parse(Console.ReadLine());
@@ -168,7 +179,7 @@ namespace Basics
                 Console.WriteLine("The largest integer is " + value3);
         }
 
-        static void Assignment9()
+        public static void Assignment9()
         {
             var values = new List<double>();
             double value;
@@ -186,7 +197,7 @@ namespace Basics
             Console.WriteLine("The sum of the values is " + values.Sum());
         }
 
-        static void Assignment10()
+        public static void Assignment10()
         {
             int[] values = { 1, 2, 33, 44, 55, 68, 77, 96, 100 };
             foreach (int value in values)
@@ -196,7 +207,7 @@ namespace Basics
             }
         }
 
-        static void Assignment11()
+        public static void Assignment11()
         {
             Console.Write("Enter an integer > ");
 
@@ -215,7 +226,7 @@ namespace Basics
             }
         }
 
-        static void Assignment12()
+        public static void Assignment12()
         {
             int[] values = new int[5];
 
@@ -235,7 +246,7 @@ namespace Basics
                 Console.Write("" + value + ",");
         }
 
-        static void Assignment13()
+        public static void Assignment13()
         {
             List<int> scores = new List<int>();
             for (int i = 0; i < 5; i++)
@@ -255,7 +266,7 @@ namespace Basics
             Console.WriteLine("Total score (minus min and max) is " + scores.Sum());
         }
 
-        static void Assignment14()
+        public static void Assignment14()
         {
             List<int> grades = new List<int>();
             int grade = -1;
@@ -279,7 +290,7 @@ namespace Basics
             }
         }
 
-        static void Assignment15()
+        public static void Assignment15()
         {
             Console.Write("Enter an integer > ");
             int height = int.Parse(Console.ReadLine());
@@ -308,7 +319,7 @@ namespace Basics
             }
         }
 
-        static void Assignment16()
+        public static void Assignment16()
         {
             int random = new Random().Next(100);
             int numGuesses = 0;
@@ -328,7 +339,7 @@ namespace Basics
             Console.WriteLine("Congratulations, you guessed right on your " + numGuesses + " guess");
         }
 
-        static void Assignment17()
+        public static void Assignment17()
         {
             int[] array1 = { 5, 54, 10, 20, 30, 40, 50, 105 };
             int[] array2 = { 5, 10, 15, 25, 35, 45 };
@@ -353,7 +364,7 @@ namespace Basics
                 Console.Write("" + value + ",");
         }
 
-        static void Assignment18()
+        public static void Assignment18()
         {
             Console.Write("Enter a string > ");
             string str = Console.ReadLine();
@@ -368,7 +379,7 @@ namespace Basics
                 Console.WriteLine("The string is not a palindrome");
         }
 
-        static void Assignment19()
+        public static void Assignment19()
         {
             Console.WriteLine("Try to guess the word");
 
@@ -425,7 +436,7 @@ namespace Basics
             Console.WriteLine("You lost!");
         }
 
-        static void Assignment20()
+        public static void Assignment20()
         {
             DoAsyncStuff();
             for (int i = 0; i < 50; i++)
@@ -434,7 +445,7 @@ namespace Basics
             }
         }
 
-        static async void DoAsyncStuff()
+        public static async void DoAsyncStuff()
         {
             Console.WriteLine("Beginning async stuff... " + Thread.CurrentThread.ManagedThreadId);
             int n = 2;
@@ -458,7 +469,7 @@ namespace Basics
             Console.WriteLine("Finished async stuff. " + Thread.CurrentThread.ManagedThreadId);
         }
 
-        static void DoTaskStuff(int taskNumber)
+        public static void DoTaskStuff(int taskNumber)
         {
             Console.WriteLine("Beginning task " + taskNumber + ", Thread: " + Thread.CurrentThread.ManagedThreadId);
             for (int i = 0; i < 20; i++)
