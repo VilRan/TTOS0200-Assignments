@@ -24,6 +24,7 @@ namespace Basics
                 Type type = typeof(Program);
                 MethodInfo info = type.GetMethod("Assignment" + assignment, BindingFlags.Static | BindingFlags.Public);
                 info.Invoke(null, null);
+                Console.WriteLine();
             }
         }
 
@@ -343,13 +344,7 @@ namespace Basics
         {
             int[] array1 = { 5, 54, 10, 20, 30, 40, 50, 105 };
             int[] array2 = { 5, 10, 15, 25, 35, 45 };
-            int[] combinedArray = new int[array1.Length + array2.Length];
-            int i = 0;
-            foreach (int value in Enumerable.Concat(array1, array2).OrderBy(v => v))
-            {
-                combinedArray[i] = value;
-                i++;
-            }
+            int[] combinedArray = Enumerable.Concat(array1, array2).OrderBy(v => v).ToArray();
 
             Console.Write("\nValues in Array 1 : ");
             foreach (int value in array1)
@@ -362,6 +357,8 @@ namespace Basics
             Console.Write("\nValues in the combined array : ");
             foreach (int value in combinedArray)
                 Console.Write("" + value + ",");
+
+            Console.WriteLine();
         }
 
         public static void Assignment18()
