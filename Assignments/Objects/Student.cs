@@ -23,39 +23,113 @@ namespace Objects
         {
             return (date - dateOfBirth).Days / 365;
         }
+
+        public static DateTime GenerateDateOfBirth(Random random)
+        {
+            int dobYear = 1980 + random.Next(15);
+            int dobMonth = random.Next(12);
+            int dobDay = random.Next(DateTime.DaysInMonth(dobYear, dobMonth));
+            return new DateTime(dobYear, dobMonth, dobDay);
+        }
+
+        public static string GenerateName(Random random)
+        {
+            string name = "";
+            int letters = random.Next(2, 8);
+            for (int i = 0; i < letters; i++)
+                name += ('a' + random.Next(25));
+            return name;
+        }
     }
 
     public class Student : Person
     {
         private List<CourseParticipation> Courses = new List<CourseParticipation>();
-        private string id;
+        private string studentID;
 
-        public string ID { get { return id; } set { id = value; } }
-        public double AverageGrade { get { return (double)Courses.Sum(c => c.Grade) / Courses.Count; } }
-        public int StudyCredits { get { return Courses.Sum(course => course.IsPassed ? course.Course.StudyCredits : 0); } }
-
-        public Student(DateTime dateOfBirth, string name, string id)
-            : base(dateOfBirth, name)
+        public string StudentID { get { return studentID; } set { studentID = value; } }
+        public IEnumerable<CourseParticipation> PassedCourses
         {
-            this.id = id;
+            get
+            {
+                return Courses.Where(course => course.IsPassed);
+            }
+        }
+        public double AverageGrade
+        {
+            get
+            {
+                return (double)PassedCourses.Sum(course => course.Grade) / PassedCourses.Count();
+            }
+        }
+        public double WeightedAverageGrade
+        {
+            get
+            {
+                return (double)PassedCourses.Sum(course => course.Grade * course.Course.StudyCredits) / StudyCredits;
+            }
+        }
+        public int StudyCredits
+        {
+            get
+            {
+                return PassedCourses.Sum(course => course.Course.StudyCredits );
+            }
         }
 
+        public Student(DateTime dateOfBirth, string name, string studentID)
+            : base(dateOfBirth, name)
+        {
+            this.studentID = studentID;
+        }
+
+        public void Enroll(Course course)
+        {
+            if ( ! Courses.Exists(c => c.Course == course))
+            {
+                CourseParticipation participation = new CourseParticipation(course);
+            }
+        }
+
+        public void GiveGrade(Course course, int grade)
+        {
+            CourseParticipation participation = Courses.Find(c => c.Course == course);
+            participation.Grade = grade;
+        }
     }
 
     public class Course
     {
+        private string title;
         private int studyCredits;
-        
+        private bool isGradeless;
+
+        public string Title { get { return title; } }
         public int StudyCredits { get { return studyCredits; } }
+        public bool IsGradeless { get { return isGradeless; } }
+
+        public Course(string title, int studyCredits, bool isGradeless)
+        {
+            this.title = title;
+            this.studyCredits = studyCredits;
+            this.isGradeless = isGradeless;
+        }
     }
 
     public class CourseParticipation
     {
         private Course course;
         private int grade;
+        private bool isPassed;
 
-        public int Grade { get { return grade; } }
         public Course Course { get { return course; } }
-        public bool IsPassed { get { return Grade > 0; } }
+        public int Grade { get { return grade; } set { grade = value; } }
+        public bool IsGradeless { get { return course.IsGradeless; } }
+        public bool IsPassed { get { return isPassed; } }
+
+        public CourseParticipation(Course course)
+        {
+            this.course = course;
+        }
     }
 }

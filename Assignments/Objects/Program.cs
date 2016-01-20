@@ -77,7 +77,25 @@ namespace Objects
 
         public static void Assignment5()
         {
+            List<Course> courses = new List<Course>();
+            courses.Add(new Course("Programming", 5, false) );
+            courses.Add(new Course("Mathematics", 5, false));
+            courses.Add(new Course("Physics", 5, false));
 
+            Random random = new Random();
+            int numStudents = 100;
+            int idCounter = 1000;
+            List<Student> students = new List<Student>(numStudents);
+            for (int i = 0; i < numStudents; i++)
+            {
+                Student student = new Student(Person.GenerateDateOfBirth(random), Person.GenerateName(random), "" + idCounter++);
+                foreach (Course course in courses)
+                {
+                    student.Enroll(course);
+                }
+                students.Add(student);
+            }
         }
+
     }
 }
