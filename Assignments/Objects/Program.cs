@@ -9,14 +9,16 @@ namespace Objects
 {
     class Program
     {
+        const int Assignments = 4;
+
         static void Main(string[] args)
         {
             while (true)
             {
-                Console.Write("Enter assignment number (1-1) or enter something else to exit > ");
+                Console.Write("Enter assignment number (1-" + Assignments + ") or enter something else to exit > ");
                 int assignment;
                 if (!int.TryParse(Console.ReadLine(), out assignment)
-                    || assignment < 1 || assignment > 20)
+                    || assignment < 1 || assignment > Assignments)
                     break;
 
                 Type type = typeof(Program);
@@ -57,6 +59,20 @@ namespace Objects
                     }
                 }
             }
+        }
+
+        public static void Assignment2()
+        {
+
+        }
+        public static void Assignment3()
+        {
+
+        }
+        public static void Assignment4()
+        {
+            Vehicle vehicle = new Vehicle() { Name = "Test", Speed = 100, Tyres = 4 };
+            vehicle.PrintData();
         }
     }
 }
