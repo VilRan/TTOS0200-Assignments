@@ -12,7 +12,7 @@ namespace Objects
         public double Humidity;
         public bool IsOn { private set; get; }
 
-        public double TemperatureCelsius
+        public double Celsius
         {
             get
             {
@@ -27,17 +27,17 @@ namespace Objects
 
         public Sauna()
         {
-            TemperatureCelsius = 22.0;
+            Celsius = 22.0;
             Humidity = 0;
         }
 
         public void Update()
         {
-            if (IsOn && TemperatureCelsius < 100)
+            if (IsOn && Celsius < 100)
             {
                 Temperature += 0.01;
             }
-            else if (IsOff && TemperatureCelsius > 20)
+            else if (IsOff && Celsius > 20)
             {
                 Temperature -= 0.01;
             }

@@ -55,7 +55,7 @@ namespace Objects
                     if (ticks % 100 == 0)
                     {
                         sauna.Update();
-                        Console.WriteLine("Temperature: " + Math.Round(sauna.TemperatureCelsius, 1) + "°C");
+                        Console.WriteLine("Temperature: " + Math.Round(sauna.Celsius, 1) + "°C");
                     }
                 }
             }
@@ -73,6 +73,11 @@ namespace Objects
         {
             Vehicle vehicle = new Vehicle() { Name = "Test", Speed = 100, Tyres = 4 };
             vehicle.PrintData();
+        }
+
+        public static void Assignment5()
+        {
+
         }
     }
 }
