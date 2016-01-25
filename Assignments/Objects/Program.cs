@@ -110,5 +110,10 @@ namespace Objects
             
         }
 
+        public static void Assignment6()
+        {
+
+        }
+
     }
 }
