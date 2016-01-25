@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="House.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sauna.cs" />
@@ -53,6 +54,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="House.class.violet.html" />
     <Content Include="Sauna.class.violet.html" />
     <Content Include="Student.class.violet.html" />
   </ItemGroup>

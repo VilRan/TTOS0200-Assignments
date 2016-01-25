@@ -9,7 +9,7 @@ namespace Objects
 {
     class Program
     {
-        const int Assignments = 5;
+        const int Assignments = 6;
 
         static void Main(string[] args)
         {
@@ -112,7 +112,14 @@ namespace Objects
 
         public static void Assignment6()
         {
+            Random random = new Random();
+            House house = new House(20, 10, 6, 2);
+            Person[] people = new Person[10];
+            for (int i = 0; i < 10; i++)
+                people[i] = new Person(Person.GenerateDateOfBirth(random), Person.GenerateName(random));
+            house.MoveIn(people);
 
+            Console.WriteLine("Floor Area: {0}, Occupants: {1}", house.FloorArea, house.Occupants.Count());
         }
 
     }
