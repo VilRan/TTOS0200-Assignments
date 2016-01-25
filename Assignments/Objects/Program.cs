@@ -9,7 +9,7 @@ namespace Objects
 {
     class Program
     {
-        const int Assignments = 4;
+        const int Assignments = 5;
 
         static void Main(string[] args)
         {
@@ -24,6 +24,7 @@ namespace Objects
                 Type type = typeof(Program);
                 MethodInfo info = type.GetMethod("Assignment" + assignment, BindingFlags.Static | BindingFlags.Public);
                 info.Invoke(null, null);
+                Console.WriteLine();
             }
         }
 
@@ -78,9 +79,10 @@ namespace Objects
         public static void Assignment5()
         {
             List<Course> courses = new List<Course>();
-            courses.Add(new Course("Programming", 5, false) );
+            courses.Add(new Course("Programming", 7, false) );
             courses.Add(new Course("Mathematics", 5, false));
-            courses.Add(new Course("Physics", 5, false));
+            courses.Add(new Course("Physics", 3, false));
+            courses.Add(new Course("Something", 5, true));
 
             Random random = new Random();
             int numStudents = 100;
@@ -92,9 +94,20 @@ namespace Objects
                 foreach (Course course in courses)
                 {
                     student.Enroll(course);
+                    if (course.IsGradeless)
+                        student.GiveGrade(course, random.Next(2) == 1);
+                    else
+                        student.GiveGrade(course, random.Next(6));
                 }
                 students.Add(student);
             }
+            
+            foreach (Student student in students.OrderBy(s => s.WeightedAverageGrade).OrderBy(s => s.StudyCredits))
+            {
+                Console.WriteLine("ID: {1:D}, Name: {0},  Avg Grade: {2:N}, Weighted Avg: {3:N}, Credits: {4:D}", 
+                    student.Name, student.StudentID, student.AverageGrade, student.WeightedAverageGrade, student.StudyCredits);
+            }
+            
         }
 
     }

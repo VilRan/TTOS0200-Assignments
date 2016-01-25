@@ -19,16 +19,16 @@ namespace Objects
             this.dateOfBirth = dateOfBirth;
             this.name = name;
         }
-        public int GetAge(DateTime date)
+        public int GetAge(DateTime at)
         {
-            return (date - dateOfBirth).Days / 365;
+            return (at - dateOfBirth).Days / 365;
         }
 
         public static DateTime GenerateDateOfBirth(Random random)
         {
             int dobYear = 1980 + random.Next(15);
-            int dobMonth = random.Next(12);
-            int dobDay = random.Next(DateTime.DaysInMonth(dobYear, dobMonth));
+            int dobMonth = 1 + random.Next(12);
+            int dobDay = 1 + random.Next(DateTime.DaysInMonth(dobYear, dobMonth));
             return new DateTime(dobYear, dobMonth, dobDay);
         }
 
@@ -37,7 +37,7 @@ namespace Objects
             string name = "";
             int letters = random.Next(2, 8);
             for (int i = 0; i < letters; i++)
-                name += ('a' + random.Next(25));
+                name += (char)('a' + random.Next(25));
             return name;
         }
     }
@@ -88,6 +88,7 @@ namespace Objects
             if ( ! Courses.Exists(c => c.Course == course))
             {
                 CourseParticipation participation = new CourseParticipation(course);
+                Courses.Add(participation);
             }
         }
 
@@ -95,6 +96,14 @@ namespace Objects
         {
             CourseParticipation participation = Courses.Find(c => c.Course == course);
             participation.Grade = grade;
+            if (grade > 0)
+                participation.IsPassed = true;
+        }
+
+        public void GiveGrade(Course course, bool isPassed)
+        {
+            CourseParticipation participation = Courses.Find(c => c.Course == course);
+            participation.IsPassed = isPassed;
         }
     }
 
@@ -125,7 +134,7 @@ namespace Objects
         public Course Course { get { return course; } }
         public int Grade { get { return grade; } set { grade = value; } }
         public bool IsGradeless { get { return course.IsGradeless; } }
-        public bool IsPassed { get { return isPassed; } }
+        public bool IsPassed { get { return isPassed; } set { isPassed = value; } }
 
         public CourseParticipation(Course course)
         {
