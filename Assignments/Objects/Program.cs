@@ -102,7 +102,7 @@ namespace Objects
                 students.Add(student);
             }
             
-            foreach (Student student in students.OrderBy(s => s.WeightedAverageGrade).OrderBy(s => s.StudyCredits))
+            foreach (Student student in students.OrderBy(s => s.StudyCredits).ThenBy(s => s.WeightedAverageGrade))
             {
                 Console.WriteLine("ID: {1:D}, Name: {0},  Avg Grade: {2:N}, Weighted Avg: {3:N}, Credits: {4:D}", 
                     student.Name, student.StudentID, student.AverageGrade, student.WeightedAverageGrade, student.StudyCredits);
