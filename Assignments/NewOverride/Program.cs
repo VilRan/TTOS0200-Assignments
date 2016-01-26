@@ -24,14 +24,14 @@ namespace NewOverride
             B b1 = new B();
             A b2 = new B();
 
-            a.C();
-            a.D();
-            b1.C();
-            b1.D();
-            b2.C();
-            b2.D();
-            ((B)b2).C();
-            ((B)b2).D();
+            a.C(); // A!
+            a.D(); // A!
+            b1.C(); // B!
+            b1.D(); // B!
+            b2.C(); // B!
+            b2.D(); // A!
+            ((B)b2).C(); // B!
+            ((B)b2).D(); // B!
 
             Console.ReadLine();
         }
