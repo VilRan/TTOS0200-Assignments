@@ -9,16 +9,17 @@ namespace Objects
 {
     class Program
     {
-        const int Assignments = 6;
+        const int MinAssignments = 1;
+        const int MaxAssignments = 6;
 
         static void Main(string[] args)
         {
             while (true)
             {
-                Console.Write("Enter assignment number (1-" + Assignments + ") or enter something else to exit > ");
+                Console.Write("Enter assignment number (" + MinAssignments + "-" + MaxAssignments + ") or enter something else to exit > ");
                 int assignment;
                 if (!int.TryParse(Console.ReadLine(), out assignment)
-                    || assignment < 1 || assignment > Assignments)
+                    || assignment < MinAssignments || assignment > MaxAssignments)
                     break;
 
                 Type type = typeof(Program);

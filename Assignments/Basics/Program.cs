@@ -11,14 +11,17 @@ namespace Basics
 {
     class Program
     {
+        const int MinAssignments = 1;
+        const int MaxAssignments = 20;
+
         static void Main(string[] args)
         {
             while (true)
             {
-                Console.Write("Enter assignment number (1-20) or enter something else to exit > ");
+                Console.Write("Enter assignment number (" + MinAssignments + "-" + MaxAssignments + ") or enter something else to exit > ");
                 int assignment;
-                if ( ! int.TryParse(Console.ReadLine(), out assignment) 
-                    || assignment < 1 || assignment > 20)
+                if (!int.TryParse(Console.ReadLine(), out assignment)
+                    || assignment < MinAssignments || assignment > MaxAssignments)
                     break;
 
                 Type type = typeof(Program);
