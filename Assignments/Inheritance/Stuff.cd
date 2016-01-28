@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Inheritance.BoxBase" Collapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAEAAAACAAEBAAAEAAAAAAAIAAQAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Inheritance.Box" Collapsed="true">
+    <Position X="5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAQAQEAAAEBAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.ElectronicDevice" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.Phone" Collapsed="true">
+    <Position X="1" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.Tablet" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.Laptop" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.OpticalDiscDrive" Collapsed="true">
+    <Position X="3" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.Cylinder" Collapsed="true">
+    <Position X="3" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAABACAAAAAQAAACAAAgAAAAAAAAAAAIBAQAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Inheritance.OpticalDisc" Collapsed="true">
+    <Position X="3" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAgAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.CD" Collapsed="true">
+    <Position X="2" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.DVD" Collapsed="true">
+    <Position X="4" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.PaperDevice" Collapsed="true">
+    <Position X="8" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAEAAEAAAEBAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.PaperSheet" Collapsed="true">
+    <Position X="5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAIAQAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.Book" Collapsed="true">
+    <Position X="7" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEBAAAAQAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.Magazine" Collapsed="true">
+    <Position X="9.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.Computer" Collapsed="true">
+    <Position X="3" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Inheritance.DataStorage" Collapsed="true">
+    <Position X="1" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAQAAAAAQAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Inheritance.I3DShape" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAQAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Inheritance.IBox" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEBAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Stuff.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
