@@ -47,7 +47,7 @@ namespace Inheritance
         private readonly double width, length, height;
     }
     
-    class ElectronicDevice : Box
+    abstract class ElectronicDevice : Box
     {
         public bool IsOn { get { return isOn; } }
         
@@ -65,7 +65,7 @@ namespace Inheritance
         private bool isOn;
     }
 
-    class Computer : ElectronicDevice
+    abstract class Computer : ElectronicDevice
     {
         public Computer(double width, double length, double height)
             : base (width, length, height)
@@ -76,9 +76,9 @@ namespace Inheritance
         protected DataStorage hardDrive;
     }
 
-    class Phone : Computer
+    class Smartphone : Computer
     {
-        public Phone(double width, double length, double height)
+        public Smartphone(double width, double length, double height)
             : base (width, length, height)
         {
             hardDrive = new DataStorage(16000);
@@ -90,12 +90,14 @@ namespace Inheritance
         public Tablet(double width, double length, double height)
             : base(width, length, height)
         {
-            hardDrive = new DataStorage(16000);
+            hardDrive = new DataStorage(32000);
         }
     }
 
     class Laptop : Computer
     {
+        public OpticalDiscDrive DiscDrive { get { return discDrive; } }
+
         public Laptop(double width, double length, double height)
             : base(width, length, height)
         {
@@ -108,11 +110,11 @@ namespace Inheritance
 
     class OpticalDiscDrive
     {
-        private OpticalDisc disc;
+        public OpticalDisc Disc { get { return disc; } }
 
-        private bool Insert(OpticalDisc disc)
+        public bool Insert(OpticalDisc disc)
         {
-            if (disc == null)
+            if (this.disc == null)
             {
                 this.disc = disc;
                 return true;
@@ -120,12 +122,14 @@ namespace Inheritance
             return false;
         }
 
-        private OpticalDisc Eject()
+        public OpticalDisc Eject()
         {
             OpticalDisc ejected = disc;
             disc = null;
             return disc;
         }
+
+        private OpticalDisc disc;
     }
 
     class Cylinder : I3DShape
@@ -150,14 +154,16 @@ namespace Inheritance
 
     abstract class OpticalDisc : Cylinder
     {
-        public DataStorage Data;
+        public DataStorage Data { get { return data; } }
         public abstract int MaxBytes { get; }
 
         public OpticalDisc(double radius, double thickness)
             : base(radius, thickness)
         {
-            Data = new DataStorage(MaxBytes);
+            data = new DataStorage(MaxBytes);
         }
+
+        private DataStorage data;
     }
 
     class CD : OpticalDisc
@@ -184,22 +190,46 @@ namespace Inheritance
 
     class DataStorage
     {
-        public DataStorage(int bytes)
+        public DataStorage(int sizeInBytes)
         {
-            data = new byte[bytes];
+            data = new byte[sizeInBytes];
+        }
+        
+        public void WriteBytes(int position, byte[] bytes)
+        {
+            foreach (byte b in bytes)
+            {
+                if (position >= data.Length)
+                    position -= data.Length;
+                data[position] = b;
+                position++;
+            }
+
+        }
+        
+        public IEnumerable<byte> ReadBytes(int position, int length)
+        {
+            int max = Math.Min(position + length, data.Length - 1);
+            for (int i = position; i < max; i++)
+                yield return data[i];
+        }
+
+        public void WriteInt(int position, int value)
+        {
+            WriteBytes(position, BitConverter.GetBytes(value));
+        }
+
+        public int ReadInt(int position)
+        {
+            return BitConverter.ToInt32(data, position);
         }
 
         public void WriteString(int position, string str)
         {
             foreach (char c in str)
             {
-                foreach (byte b in BitConverter.GetBytes(c))
-                {
-                    if (position >= data.Length)
-                        position -= data.Length;
-                    data[position] = b;
-                    position++;
-                }
+                WriteBytes(position, BitConverter.GetBytes(c));
+                position += 2;
             }
         }
 
@@ -218,14 +248,14 @@ namespace Inheritance
     {
         public PaperSheet[] Sheets;
 
-        public override double Width { get { return Sheets.Max(p => p.Width); } }
+        public override double Width { get { return Sheets.Max(p => p.Width) / 2; } }
         public override double Length { get { return Sheets.Max(p => p.Length); } }
-        public override double Height { get { return Sheets.Sum(p => p.Height); } }
+        public override double Height { get { return Sheets.Sum(p => p.Height) * 2; } }
         public int PageCount { get { return Sheets.Length * 2; } }
 
-        public PaperDevice(params PaperSheet[] sheet)
+        public PaperDevice(params PaperSheet[] sheets)
         {
-            Sheets = sheet;
+            Sheets = sheets;
         }
     }
 
@@ -251,13 +281,13 @@ namespace Inheritance
         
         public override double Width { get { return Math.Max(Math.Max(base.Width, FrontCover.Width), BackCover.Width); } }
         public override double Length { get { return Math.Max(Math.Max(base.Length, FrontCover.Length), BackCover.Length); } }
-        public override double Height { get { return Math.Max(Math.Max(base.Height, FrontCover.Height), BackCover.Height); } }
+        public override double Height { get { return base.Height + FrontCover.Height + BackCover.Height; } }
 
-        public Book(double coverThickness, params PaperSheet[] pages)
-            : base(pages)
+        public Book(double coverThickness, params PaperSheet[] sheets)
+            : base(sheets)
         {
-            FrontCover = new Cover(Width, Height, coverThickness);
-            BackCover = new Cover(Width, Height, coverThickness);
+            FrontCover = new Cover(sheets.Max(p => p.Width) / 2, sheets.Max(p => p.Length), coverThickness);
+            BackCover = new Cover(sheets.Max(p => p.Width) / 2, sheets.Max(p => p.Length), coverThickness);
         }
 
         public class Cover : Box

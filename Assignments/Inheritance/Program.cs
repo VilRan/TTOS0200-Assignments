@@ -46,6 +46,38 @@ namespace Inheritance
         }
         public static void Assignment6()
         {
+            for (int i = 0; i < 5; i++)
+            {
+                Box box = new Box((i + 1) * 3, (i + 1) * 2, (i + 1));
+                Console.WriteLine("Box - Width={0}m, Length={1}m, Height={2}m, Area={3}m^2, Volume={4}m^3", 
+                    box.Width, box.Length, box.Height, box.Area, box.Volume);
+            }
+            Console.WriteLine();
+
+            PaperSheet[] sheets = new PaperSheet[1000];
+            for (int i = 0; i < 1000; i++)
+            {
+                sheets[i] = PaperSheet.A4;
+            }
+            Book book = new Book(0.005, sheets);
+            Console.WriteLine("Book - Width={0}cm, Length={1}cm, Thickness={2}cm",
+                book.Width*100, book.Length*100, book.Height*100);
+            Console.WriteLine();
+
+            Laptop laptop = new Laptop(0.4, 0.3, 0.03);
+            laptop.TogglePower();
+            DVD dvd = new DVD(100);
+            laptop.DiscDrive.Insert(dvd);
+            laptop.DiscDrive.Disc.Data.WriteString(0, "This is a test");
+            laptop.DiscDrive.Disc.Data.WriteString(22, "This should partially overwrite the last one");
+            laptop.DiscDrive.Eject();
+
+            Laptop laptop2 = new Laptop(0.4, 0.3, 0.03);
+            laptop2.TogglePower();
+            laptop2.DiscDrive.Insert(dvd);
+            Console.WriteLine("DVD Data - " + laptop2.DiscDrive.Disc.Data.ReadString(0, 40));
+
+            Console.WriteLine();
 
         }
         public static void Assignment7()
