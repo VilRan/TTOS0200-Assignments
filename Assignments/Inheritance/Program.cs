@@ -84,26 +84,26 @@ namespace Inheritance
         {
             Random random = new Random();
             int n = 100;
-            I3DObject[] shapes = new I3DObject[n];
+            I3DObject[] objects = new I3DObject[n];
             for (int i = 0; i < n; i++)
             {
                 switch(random.Next(3))
                 {
                     case 0:
-                        shapes[i] = new Box(random.NextDouble(), random.NextDouble(), random.NextDouble());
+                        objects[i] = new Box(random.NextDouble(), random.NextDouble(), random.NextDouble());
                         break;
                     case 1:
-                        shapes[i] = new Cylinder(random.NextDouble(), random.NextDouble());
+                        objects[i] = new Cylinder(random.NextDouble(), random.NextDouble());
                         break;
                     case 2:
-                        shapes[i] = new Sphere(random.NextDouble());
+                        objects[i] = new Sphere(random.NextDouble());
                         break;
                 }
             }
 
-            I3DObject largest = shapes.OrderByDescending(s => s.Volume).FirstOrDefault();
+            I3DObject largest = objects.OrderByDescending(o => o.Volume).FirstOrDefault();
             Console.WriteLine("Largest shape: {0} ({1}m^3)", largest.GetType(), largest.Volume);
-            Console.WriteLine("Total volume of all shapes: {0}", shapes.Sum(s => s.Volume));
+            Console.WriteLine("Total volume of all shapes: {0}", objects.Sum(o => o.Volume));
         }
     }
 }
