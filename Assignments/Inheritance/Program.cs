@@ -82,7 +82,28 @@ namespace Inheritance
         }
         public static void Assignment7()
         {
+            Random random = new Random();
+            int n = 100;
+            I3DShape[] shapes = new I3DShape[n];
+            for (int i = 0; i < n; i++)
+            {
+                switch(random.Next(3))
+                {
+                    case 0:
+                        shapes[i] = new Box(random.NextDouble(), random.NextDouble(), random.NextDouble());
+                        break;
+                    case 1:
+                        shapes[i] = new Cylinder(random.NextDouble(), random.NextDouble());
+                        break;
+                    case 2:
+                        shapes[i] = new Sphere(random.NextDouble());
+                        break;
+                }
+            }
 
+            I3DShape largest = shapes.OrderByDescending(s => s.Volume).FirstOrDefault();
+            Console.WriteLine("Largest shape: {0} ({1}m^3)", largest.GetType(), largest.Volume);
+            Console.WriteLine("Total volume of all shapes: {0}", shapes.Sum(s => s.Volume));
         }
     }
 }

@@ -308,4 +308,18 @@ namespace Inheritance
 
         }
     }
+
+    class Sphere : I3DShape
+    {
+        public double Radius { get { return radius; } }
+        public double Area { get { return 4 * Math.PI * radius * radius; } }
+        public double Volume { get { return 4 * Math.PI * radius * radius * radius / 3; } }
+
+        public Sphere(double radius)
+        {
+            this.radius = radius;
+        }
+
+        private readonly double radius;
+    }
 }
