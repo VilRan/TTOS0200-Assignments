@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Inheritance
 {
-    interface I3DShape
+    interface I3DObject
     {
         double Area { get; }
         double Volume { get; }
     }
 
-    interface IBox : I3DShape
+    interface IBox : I3DObject
     {
         double Width { get; }
         double Length { get; }
@@ -132,7 +132,7 @@ namespace Inheritance
         private OpticalDisc disc;
     }
 
-    class Cylinder : I3DShape
+    class Cylinder : I3DObject
     {
         public double Diameter { get { return radius * 2; } }
         public double Radius { get { return radius; } }
@@ -309,7 +309,7 @@ namespace Inheritance
         }
     }
 
-    class Sphere : I3DShape
+    class Sphere : I3DObject
     {
         public double Radius { get { return radius; } }
         public double Area { get { return 4 * Math.PI * radius * radius; } }

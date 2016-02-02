@@ -84,7 +84,7 @@ namespace Inheritance
         {
             Random random = new Random();
             int n = 100;
-            I3DShape[] shapes = new I3DShape[n];
+            I3DObject[] shapes = new I3DObject[n];
             for (int i = 0; i < n; i++)
             {
                 switch(random.Next(3))
@@ -101,7 +101,7 @@ namespace Inheritance
                 }
             }
 
-            I3DShape largest = shapes.OrderByDescending(s => s.Volume).FirstOrDefault();
+            I3DObject largest = shapes.OrderByDescending(s => s.Volume).FirstOrDefault();
             Console.WriteLine("Largest shape: {0} ({1}m^3)", largest.GetType(), largest.Volume);
             Console.WriteLine("Total volume of all shapes: {0}", shapes.Sum(s => s.Volume));
         }
