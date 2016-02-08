@@ -17,9 +17,49 @@ namespace Composition
 
         public List<Galaxy> Galaxies = new List<Galaxy>();
 
+        public IEnumerable<CelestialSystem> Systems
+        {
+            get
+            {
+                foreach (Galaxy galaxy in Galaxies)
+                    foreach (CelestialSystem system in galaxy.Systems)
+                        yield return system;
+            }
+        }
+        public IEnumerable<CelestialBody> Planets
+        {
+            get
+            {
+                foreach (CelestialSystem system in Systems)
+                    foreach (CelestialBody planet in system.Planets)
+                        yield return planet;
+            }
+        }
+        public IEnumerable<CelestialBody> Moons
+        {
+            get
+            {
+                foreach (CelestialBody planet in Planets)
+                    foreach (CelestialBody moon in planet.Satellites)
+                        yield return moon;
+            }
+        }
+        public IEnumerable<CelestialBody> CelestialBodies
+        {
+            get
+            {
+                foreach (CelestialSystem system in Systems)
+                {
+                    yield return system.Primary;
+                    foreach (CelestialBody body in system.Primary.EntireSystem)
+                        yield return body;
+                }
+            }
+        }
+
         public Universe(Random random)
         {
-            int number = (int)Math.Abs(random.NextGaussian(0, 1000));
+            int number = 1 + (int)Math.Abs(random.NextGaussian(0, 10));
             Galaxies = new List<Galaxy>(number);
             for (int i = 0; i < number; i++)
             {
@@ -35,7 +75,7 @@ namespace Composition
 
         public Galaxy(Random random)
         {
-            int number = (int)Math.Abs(random.NextGaussian(0, 1000));
+            int number = 1 + (int)Math.Abs(random.NextGaussian(0, 1000));
             Systems = new List<CelestialSystem>(number);
             for (int i = 0; i < number; i++)
             {
@@ -47,8 +87,9 @@ namespace Composition
 
     class CelestialSystem
     {
-        public List<CelestialBody> Bodies;
         public CelestialBody Primary;
+
+        public IEnumerable<CelestialBody> Planets { get { return Primary.Satellites; } }
 
         public CelestialSystem(Random random)
         {
@@ -63,14 +104,7 @@ namespace Composition
         public double Periapsis;
         public double Apoapsis;
         public double Mass;
-
-        public double PeriapsisInAUs { get { return Periapsis / Universe.AstronomicalUnit; } }
-        public double ApoapsisInAUs { get { return Apoapsis / Universe.AstronomicalUnit; } }
-        public double PeriapsisInLightyears { get { return Periapsis / Universe.Lightyear; } }
-        public double ApoapsisInLightyears { get { return Apoapsis / Universe.Lightyear; } }
-        public double MassInEarths { get { return Mass / Universe.EarthMass; } }
-        public double MassInJupiters { get { return Mass / Universe.JupiterMass; } }
-        public double MassInSuns { get { return Mass / Universe.SunMass; } }
+        
         public double SemimajorAxis { get { return (Periapsis + Apoapsis) / 2; } }
         public double Eccentricity { get { return (Apoapsis - Periapsis) / (Apoapsis + Periapsis); } }
         public double SphereOfInfluence
@@ -78,8 +112,21 @@ namespace Composition
             get
             {
                 if (Primary == null)
-                    return double.MaxValue;
+                    return Universe.Lightyear / 1000;
                 return SemimajorAxis * Math.Pow(Mass / Primary.Mass, 2.0/5.0);
+            }
+        }
+
+        public IEnumerable<CelestialBody> EntireSystem
+        {
+            get
+            {
+                foreach (CelestialBody satellite in Satellites)
+                {
+                    yield return satellite;
+                    foreach (CelestialBody satelliteOfSatellite in satellite.EntireSystem)
+                        yield return satelliteOfSatellite;
+                }
             }
         }
 
@@ -87,14 +134,19 @@ namespace Composition
         {
             Mass = mass;
 
-            int numSatellites = (int)Math.Abs(random.NextGaussian(0, 10));
+            int numSatellites = 0;
+            if ( !(this is Asteroid))
+                do
+                    numSatellites = (int)Math.Abs(random.NextGaussian(0, 10));
+                while (numSatellites > 10);
+
             Satellites = new List<CelestialBody>(numSatellites);
             for (int i = 0; i < numSatellites; i++)
             {
-                double satelliteMass, semimajorAxis, eccentricity;
+                double massFraction, semimajorAxis, eccentricity;
                 do
-                    satelliteMass = Math.Abs(random.NextGaussian(0, 0.1));
-                while (satelliteMass > 1);
+                    massFraction = Math.Abs(random.NextGaussian(0, 0.001));
+                while (massFraction > 0.01);
                 do
                     semimajorAxis = Math.Abs(random.NextGaussian(0, SphereOfInfluence / 10));
                 while (semimajorAxis > SphereOfInfluence);
@@ -102,7 +154,8 @@ namespace Composition
                     eccentricity = Math.Abs(random.NextGaussian(0, 0.1));
                 while (eccentricity > 1);
 
-                CelestialBody satellite = CreateFromMass(Mass * random.NextDouble(0, 0.5), random);
+                CelestialBody satellite = CreateFromMass(Mass * massFraction, random);
+                satellite.Primary = this;
                 satellite.SetOrbit(semimajorAxis, eccentricity);
                 Satellites.Add(satellite);
             }

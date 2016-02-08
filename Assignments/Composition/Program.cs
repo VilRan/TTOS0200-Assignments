@@ -31,7 +31,21 @@ namespace Composition
 
         public static void Assignment4()
         {
+            Universe universe = new Universe(new Random());
 
+            Console.WriteLine("The generated universe has...");
+            Console.WriteLine("    " + universe.Galaxies.Count + " galaxies,");
+            Console.WriteLine("    " + universe.Systems.Count() + " systems,");
+            Console.WriteLine("    " + universe.Planets.Count() + " planets,");
+            Console.WriteLine("    " + universe.Moons.Count() + " moons,");
+            Console.WriteLine("    " + universe.CelestialBodies.Count() + " celestial bodies in total.");
+            Console.WriteLine();
+
+            CelestialBody planet = universe.Planets.First();
+            Console.WriteLine("The first planet of the first system of the first galaxy:");
+            Console.WriteLine("    Mass: {0:N} Earths", planet.Mass / Universe.EarthMass);
+            Console.WriteLine("    Orbit: {0:N} AU", planet.SemimajorAxis / Universe.AstronomicalUnit);
+            Console.WriteLine("    Moons: {0:D}", planet.Satellites.Count);
         }
     }
 }
