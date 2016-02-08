@@ -244,7 +244,7 @@ namespace Inheritance
         private byte[] data;
     }
 
-    class PaperDevice : BoxBase
+    abstract class PaperDevice : BoxBase
     {
         public PaperSheet[] Sheets;
 

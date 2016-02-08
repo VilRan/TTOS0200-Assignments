@@ -48,21 +48,17 @@ namespace Composition
     class CelestialSystem
     {
         public List<CelestialBody> Bodies;
+        public CelestialBody Primary;
 
         public CelestialSystem(Random random)
         {
-            int stars = (int)Math.Abs(random.NextGaussian(0, 1));
-            Bodies = new List<CelestialBody>(stars);
-            for (int i = 0; i < stars; i++)
-            {
-                Star star = new Star(random);
-                Bodies.Add(star);
-            }
+            Primary = CelestialBody.CreateFromMass(random.NextDouble(1e26, 1e30), random);
         }
     }
 
     class CelestialBody
     {
+        public CelestialBody Primary = null;
         public List<CelestialBody> Satellites;
         public double Periapsis;
         public double Apoapsis;
@@ -75,54 +71,86 @@ namespace Composition
         public double MassInEarths { get { return Mass / Universe.EarthMass; } }
         public double MassInJupiters { get { return Mass / Universe.JupiterMass; } }
         public double MassInSuns { get { return Mass / Universe.SunMass; } }
-
-        public CelestialBody(Random random)
+        public double SemimajorAxis { get { return (Periapsis + Apoapsis) / 2; } }
+        public double Eccentricity { get { return (Apoapsis - Periapsis) / (Apoapsis + Periapsis); } }
+        public double SphereOfInfluence
         {
+            get
+            {
+                if (Primary == null)
+                    return double.MaxValue;
+                return SemimajorAxis * Math.Pow(Mass / Primary.Mass, 2.0/5.0);
+            }
+        }
+
+        public CelestialBody(Random random, double mass)
+        {
+            Mass = mass;
+
             int numSatellites = (int)Math.Abs(random.NextGaussian(0, 10));
             Satellites = new List<CelestialBody>(numSatellites);
             for (int i = 0; i < numSatellites; i++)
             {
-                CelestialBody moon = CreateFromMass(Mass * random.NextDouble(0, 0.1), random);
-                Satellites.Add(moon);
+                double satelliteMass, semimajorAxis, eccentricity;
+                do
+                    satelliteMass = Math.Abs(random.NextGaussian(0, 0.1));
+                while (satelliteMass > 1);
+                do
+                    semimajorAxis = Math.Abs(random.NextGaussian(0, SphereOfInfluence / 10));
+                while (semimajorAxis > SphereOfInfluence);
+                do
+                    eccentricity = Math.Abs(random.NextGaussian(0, 0.1));
+                while (eccentricity > 1);
+
+                CelestialBody satellite = CreateFromMass(Mass * random.NextDouble(0, 0.5), random);
+                satellite.SetOrbit(semimajorAxis, eccentricity);
+                Satellites.Add(satellite);
             }
+        }
+
+        public CelestialBody(Random random, double mass, double semimajorAxis, double eccentricity)
+            : this(random, mass)
+        {
+            Mass = mass;
+            SetOrbit(semimajorAxis, eccentricity);
+        }
+
+        public void SetOrbit(double semimajorAxis, double eccentricity)
+        {
+            Periapsis = semimajorAxis * (1 - eccentricity);
+            Apoapsis = semimajorAxis * (1 + eccentricity);
         }
 
         public static CelestialBody CreateFromMass(double mass, Random random)
         {
             if (mass > 1e29)
-                return new Star(random);
+                return new Star(random, mass);
             if (mass > 1e26)
-                return new GasGiant(random);
+                return new GasGiant(random, mass);
             if (mass > 1e25)
-                return new IceGiant(random);
+                return new IceGiant(random, mass);
             if (mass > 1e23)
-                return new RockyPlanet(random);
+                return new RockyPlanet(random, mass);
             if (mass > 1e21)
-                return new DwarfPlanet(random);
+                return new DwarfPlanet(random, mass);
 
-            return new Asteroid(random);
+            return new Asteroid(random, mass);
         }
     }
 
     class Star : CelestialBody
     {
-        public Star(Random random)
-            : base (random)
+        public Star(Random random, double mass)
+            : base (random, mass)
         {
-            Mass = Math.Abs(random.NextGaussian(0, Universe.SunMass));
-            int planets = (int)Math.Abs(random.NextGaussian(0, 10));
-            Satellites = new List<CelestialBody>(planets);
-            for (int i = 0; i < planets; i++)
-            {
 
-            }
         }
     }
     
     abstract class Planet : CelestialBody
     {
-        public Planet(Random random)
-            : base(random)
+        public Planet(Random random, double mass)
+            : base(random, mass)
         {
 
         }
@@ -130,8 +158,8 @@ namespace Composition
 
     class GasGiant : Planet
     {
-        public GasGiant(Random random)
-            : base(random)
+        public GasGiant(Random random, double mass)
+            : base(random, mass)
         {
 
         }
@@ -139,8 +167,8 @@ namespace Composition
 
     class IceGiant : Planet
     {
-        public IceGiant(Random random)
-            : base(random)
+        public IceGiant(Random random, double mass)
+            : base(random, mass)
         {
 
         }
@@ -148,23 +176,17 @@ namespace Composition
 
     class RockyPlanet : Planet
     {
-        public RockyPlanet(Random random)
-            : base(random)
+        public RockyPlanet(Random random, double mass)
+            : base(random, mass)
         {
-            int moons = (int)Math.Abs(random.NextGaussian(0, 2));
-            Satellites = new List<CelestialBody>(moons);
-            for (int i = 0; i < moons; i++)
-            {
-                CelestialBody moon = CreateFromMass(Mass * random.NextDouble(0.001, 0.1), random);
-                Satellites.Add(moon);
-            }
+
         }
     }
 
     class DwarfPlanet : Planet
     {
-        public DwarfPlanet(Random random)
-            : base(random)
+        public DwarfPlanet(Random random, double mass)
+            : base(random, mass)
         {
 
         }
@@ -172,8 +194,8 @@ namespace Composition
 
     class Asteroid : Planet
     {
-        public Asteroid(Random random)
-            : base(random)
+        public Asteroid(Random random, double mass)
+            : base(random, mass)
         {
 
         }
