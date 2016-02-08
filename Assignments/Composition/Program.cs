@@ -44,7 +44,11 @@ namespace Composition
             CelestialBody planet = universe.Planets.First();
             Console.WriteLine("The first planet of the first system of the first galaxy:");
             Console.WriteLine("    Mass: {0:N} Earths", planet.Mass / Universe.EarthMass);
-            Console.WriteLine("    Orbit: {0:N} AU", planet.SemimajorAxis / Universe.AstronomicalUnit);
+            Console.WriteLine("    Orbit: {0:N} AU (Min: {1:N}, Max: {2:N}, e: {3:N})", 
+                planet.SemimajorAxis / Universe.AstronomicalUnit, 
+                planet.Periapsis / Universe.AstronomicalUnit, 
+                planet.Apoapsis / Universe.AstronomicalUnit,
+                planet.Eccentricity);
             Console.WriteLine("    Moons: {0:D}", planet.Satellites.Count);
         }
     }
