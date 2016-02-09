@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingTests", "UnitTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recap", "Recap\Recap.csproj", "{138FE75D-A2BA-4EB3-99C9-9AB7D04ED3BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecapTests", "RecapTests\RecapTests.csproj", "{D32925F0-D963-4AAC-A185-D2425567DBC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{138FE75D-A2BA-4EB3-99C9-9AB7D04ED3BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{138FE75D-A2BA-4EB3-99C9-9AB7D04ED3BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{138FE75D-A2BA-4EB3-99C9-9AB7D04ED3BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D32925F0-D963-4AAC-A185-D2425567DBC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D32925F0-D963-4AAC-A185-D2425567DBC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D32925F0-D963-4AAC-A185-D2425567DBC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D32925F0-D963-4AAC-A185-D2425567DBC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

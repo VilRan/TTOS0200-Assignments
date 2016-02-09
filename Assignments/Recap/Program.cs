@@ -10,7 +10,7 @@ namespace Recap
     class Program
     {
         const int MinAssignments = 1;
-        const int MaxAssignments = 2;
+        const int MaxAssignments = 6;
 
         static void Main(string[] args)
         {
@@ -56,6 +56,36 @@ namespace Recap
             Console.WriteLine("All products in collection: ");
             foreach (Product product in products)
                 Console.WriteLine("- product : " + product);
+        }
+
+        public static void Assignment3()
+        {
+
+        }
+
+        public static void Assignment4()
+        {
+
+        }
+
+        public static void Assignment5()
+        {
+            double[] array = { 1.0, 2.0, 3.3, 5.5, 6.3, -4.5, 12.0 };
+
+            Console.WriteLine("Sum = {0:N}", ArrayCalcs.Sum(array));
+            Console.WriteLine("Avg = {0:N}", ArrayCalcs.Average(array));
+            Console.WriteLine("Min = {0:N}", ArrayCalcs.Min(array));
+            Console.WriteLine("Max = {0:N}", ArrayCalcs.Max(array));
+        }
+
+        public static void Assignment6()
+        {
+            Invoice invoice = new Invoice() { Customer = "Kirsi Kernel" };
+            invoice.Items.Add(new InvoiceItem() { Name = "Milk", Price = 1.75, Quantity = 1 });
+            invoice.Items.Add(new InvoiceItem() { Name = "Beer", Price = 5.25, Quantity = 1 });
+            invoice.Items.Add(new InvoiceItem() { Name = "Butter", Price = 2.50, Quantity = 2 });
+
+            invoice.PrintInvoice();
         }
     }
 }
