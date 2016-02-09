@@ -120,11 +120,8 @@ namespace Composition
             {
                 yield return this;
                 foreach (CelestialBody satellite in Satellites)
-                {
-                    yield return satellite;
-                    foreach (CelestialBody satelliteOfSatellite in satellite.EntireSystem)
-                        yield return satelliteOfSatellite;
-                }
+                    foreach (CelestialBody bodyOfSatellite in satellite.EntireSystem)
+                        yield return bodyOfSatellite;
             }
         }
 
