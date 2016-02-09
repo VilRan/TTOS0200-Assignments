@@ -49,11 +49,8 @@ namespace Composition
             get
             {
                 foreach (CelestialSystem system in Systems)
-                {
-                    yield return system.Primary;
                     foreach (CelestialBody body in system.Primary.EntireSystem)
                         yield return body;
-                }
             }
         }
 
@@ -121,6 +118,7 @@ namespace Composition
         {
             get
             {
+                yield return this;
                 foreach (CelestialBody satellite in Satellites)
                 {
                     yield return satellite;
