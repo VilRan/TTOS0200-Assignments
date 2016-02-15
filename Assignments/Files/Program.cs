@@ -72,23 +72,11 @@ namespace Files
 
             IFormatter formatter = new BinaryFormatter();
             using (FileStream file = new FileStream("Programs.txt", FileMode.Create, FileAccess.Write, FileShare.None))
-            {
-                formatter.Serialize(file, programs.Count);
-                foreach (TVProgram program in programs)
-                {
-                    formatter.Serialize(file, program);
-                }
-            }
+                formatter.Serialize(file, programs);
 
             programs.Clear();
             using (FileStream file = new FileStream("Programs.txt", FileMode.Open, FileAccess.Read, FileShare.None))
-            {
-                int count = (int)formatter.Deserialize(file);
-                for (int i = 0; i < count; i++)
-                {
-                    programs.Add((TVProgram)formatter.Deserialize(file));
-                }
-            }
+                programs = (List<TVProgram>)formatter.Deserialize(file);
 
             foreach (TVProgram program in programs)
             {
