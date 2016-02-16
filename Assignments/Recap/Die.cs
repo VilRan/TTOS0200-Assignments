@@ -12,34 +12,34 @@ namespace Recap
             get
             {
                 double average = 0;
-                for (int i = 0; i < times.Length; i++)
+                for (int i = 0; i < count.Length; i++)
                 {
-                    average += (i + 1) * times[i];
+                    average += (i + 1) * count[i];
                 }
-                average /= TotalTimes;
+                average /= TotalCount;
                 return average;
             }
         }
-        public int TotalTimes { get { return times.Sum(); } }
+        public int TotalCount { get { return count.Sum(); } }
 
         public void Throw(int times)
         {
             for (int i = 0; i < times; i++)
             {
                 int result = random.Next(6);
-                this.times[result]++;
+                this.count[result]++;
             }
         }
 
-        public int GetTimes(int face)
+        public int GetCount(int face)
         {
             if (face < 1 || face > 6)
                 return 0;
 
-            return times[face - 1];
+            return count[face - 1];
         }
 
         Random random = new Random();
-        int[] times = new int[6];
+        int[] count = new int[6];
     }
 }

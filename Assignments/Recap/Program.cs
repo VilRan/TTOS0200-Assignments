@@ -37,10 +37,10 @@ namespace Recap
             int times = int.Parse(Console.ReadLine());
             die.Throw(times);
 
-            Console.WriteLine("Die has now been thrown {0} times", die.TotalTimes);
+            Console.WriteLine("Die has now been thrown {0} times", die.TotalCount);
             Console.WriteLine("- average is " + Math.Round(die.Average, 4));
             for (int i = 1; i <= 6; i++)
-                Console.WriteLine("- " + i + " count is " + die.GetTimes(i));
+                Console.WriteLine("- " + i + " count is " + die.GetCount(i));
             Console.WriteLine();
         }
 
