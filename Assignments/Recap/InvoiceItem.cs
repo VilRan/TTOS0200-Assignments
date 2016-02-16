@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Recap
 {
-    class InvoiceItem
+    public class InvoiceItem
     {
         public string Name;
         public double Price;

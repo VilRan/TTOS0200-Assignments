@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Recap
 {
-    class Invoice
+    public class Invoice
     {
         public string Customer = "";
         public List<InvoiceItem> Items = new List<InvoiceItem>();
