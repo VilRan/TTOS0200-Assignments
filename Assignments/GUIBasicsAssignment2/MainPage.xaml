@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="GUIBasicsAssignment2.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GUIBasicsAssignment2"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBox x:Name="eurTextBox" HorizontalAlignment="Left" Margin="67,106,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="81" Width="218" InputScope="Default" TextChanged="eurTextBox_TextChanged"/>
+        <TextBlock x:Name="eurTextBlock" HorizontalAlignment="Left" Margin="67,81,0,0" TextWrapping="Wrap" Text="EUR" VerticalAlignment="Top"/>
+        <TextBox x:Name="fimTextBox" HorizontalAlignment="Left" Margin="67,270,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="81" Width="218" InputScope="Default" TextChanged="fimTextBox_TextChanged"/>
+        <TextBlock x:Name="fimTextBlock" HorizontalAlignment="Left" Margin="67,245,0,0" TextWrapping="Wrap" Text="FIM" VerticalAlignment="Top"/>
+
+    </Grid>
+</Page>
