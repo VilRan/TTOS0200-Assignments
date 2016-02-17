@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="e7eed393-b807-4655-8a6f-f709c6f5df08"
+    Publisher="CN=K1533"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="e7eed393-b807-4655-8a6f-f709c6f5df08" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>GUIControlsAssignment2</DisplayName>
+    <PublisherDisplayName>K1533</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="GUIControlsAssignment2.App">
+      <uap:VisualElements
+        DisplayName="GUIControlsAssignment2"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png"
+        Description="GUIControlsAssignment2"
+        BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>
