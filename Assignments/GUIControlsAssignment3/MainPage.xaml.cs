@@ -26,5 +26,54 @@ namespace GUIControlsAssignment3
         {
             this.InitializeComponent();
         }
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void drawButton_Click(object sender, RoutedEventArgs e)
+        {
+            int numRows;
+            if ( ! int.TryParse(textBox.Text, out numRows))
+                return;
+
+            numbersTextBlock.Text = "";
+            string type = ((ComboBoxItem)comboBox.SelectedValue).Content.ToString();
+            int numbersPerRow = 0;
+            int maxValue = 0;
+            switch (type)
+            {
+                case "Lotto":
+                    maxValue = 39;
+                    numbersPerRow = 7;
+                    break;
+                case "Viking Lotto":
+                    maxValue = 48;
+                    numbersPerRow = 6;
+                    break;
+                case "Eurojackpot":
+                    maxValue = 50;
+                    numbersPerRow = 7;
+                    break;
+            }
+
+            Random rand = new Random();
+            for (int i = 0; i < numRows; i++)
+            {
+                numbersTextBlock.Text += "Row " + (i + 1) + ": ";
+                for (int j = 0; j < numbersPerRow; j++)
+                {
+                    int number = rand.Next(maxValue + 1);
+                    numbersTextBlock.Text += number + " ";
+                }
+                numbersTextBlock.Text += "\n";
+            }
+        }
+
+        private void clearButton_Click(object sender, RoutedEventArgs e)
+        {
+            numbersTextBlock.Text = "";
+        }
     }
 }

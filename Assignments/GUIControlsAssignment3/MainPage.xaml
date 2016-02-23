@@ -18,6 +18,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -25,15 +26,17 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10" TextWrapping="Wrap" Text="Choose a game:" VerticalAlignment="Top"/>
                 <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10" Grid.Row="1" TextWrapping="Wrap" Text="Number of draws:" VerticalAlignment="Top"/>
-                <TextBox x:Name="textBox" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-                <Button x:Name="button" Content="Draw" HorizontalAlignment="Right" Margin="10" Grid.Row="2" VerticalAlignment="Top"/>
-                <Button x:Name="button1" Content="Clear" Grid.Column="1" HorizontalAlignment="Left" Margin="10" Grid.Row="2" VerticalAlignment="Top"/>
-                <ComboBox x:Name="comboBox" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,5,10,0" VerticalAlignment="Top">
-                    <ListBoxItem Content="Lotto"/>
-                    <ListBoxItem Content="Viking Lotto"/>
-                    <ListBoxItem Content="Eurojackpot"/>
+                <TextBox x:Name="textBox" Grid.Column="1" HorizontalAlignment="Right" Margin="10" Grid.Row="1" TextWrapping="Wrap" Text="1" VerticalAlignment="Top"/>
+                <Button x:Name="drawButton" Content="Draw" HorizontalAlignment="Right" Margin="10" Grid.Row="2" VerticalAlignment="Top" Click="drawButton_Click"/>
+                <Button x:Name="clearButton" Content="Clear" Grid.Column="1" HorizontalAlignment="Left" Margin="10" Grid.Row="2" VerticalAlignment="Top" Click="clearButton_Click"/>
+                <ComboBox x:Name="comboBox" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,5,10,0" VerticalAlignment="Top" SelectionChanged="comboBox_SelectionChanged" SelectedIndex="0">
+                    <ComboBoxItem Content="Lotto"/>
+                    <ComboBoxItem Content="Viking Lotto"/>
+                    <ComboBoxItem Content="Eurojackpot"/>
                 </ComboBox>
+                <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10" Grid.Row="3" TextWrapping="Wrap" Text="Random numbers:" VerticalAlignment="Top"/>
             </Grid>
+            <TextBlock x:Name="numbersTextBlock" HorizontalAlignment="Left" Margin="10" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         </Grid>
 
     </Grid>
